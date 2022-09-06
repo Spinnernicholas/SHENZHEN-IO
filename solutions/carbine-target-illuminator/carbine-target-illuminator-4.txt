@@ -1,0 +1,75 @@
+[name] V5: 2S + RO (TCP Trick)
+[puzzle] Sz014
+[production-cost] 1100
+[power-usage] 187
+[lines-of-code] 12
+
+[traces] 
+......................
+......................
+......................
+......................
+......................
+......................
+....15414.15C155D4....
+....155541C.A15434....
+........14A16...14....
+........14354...94....
+................34....
+......................
+......................
+......................
+
+[chip] 
+[type] BANK
+[x] 6
+[y] 4
+[rom] 
+0,1,1,10,10,100,100,0,0,0,0,0,0,0
+
+[chip] 
+[type] UC4X
+[x] 9
+[y] 4
+[code] 
+# State Selector
+  add 1
+  tcp x2 010
+# State Change
++ mov acc x1
++ mov x0 x3
+# Timer Reset
+- mov 0 acc
+  slp 1
+
+[chip] 
+[type] DX3
+[x] 15
+[y] 4
+
+[chip] 
+[type] DX3
+[x] 8
+[y] 6
+[rotated] true
+
+[chip] 
+[type] UC4
+[x] 11
+[y] 6
+[code] 
+# Controller
+  slx x0
+  mov x0 acc
+  mov acc x1
+# Set Laser
+# 100 overrides 50
+  tcp acc 009
+- mov 0 p1
++ mov 50 p1
+
+[chip] 
+[type] NOT
+[x] 6
+[y] 7
+
